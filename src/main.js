@@ -6,24 +6,31 @@ function updateIfExists(id, body) {
   return axios
     .get(url)
     .then(({ data }) => {
-      return data.find(( { data }) => data.id == id); 
-       })
+      return data;
+      })
     .then((exists) => {
-      if (exists)
+      if (exists) throw `Constallation with "${id}" already exists`;
       return axios
         .put(url, body)
         .then(({ data }) => console.log(data));
       })
-    .catch((error) => {
-      console.log(error.message);
+    .catch(({message}) => {
+      console.error(message);    
     })
 }
+
+const leo = {
+  name: "Columba",
+  meaning: "Dove",
+  starsWithPlanets: 3,
+  quadrant: "SQ1"
+};
+
+console.log(updateIfExists("xxx", leo))
 
 module.exports = {
   updateIfExists,
 };
-
-
 
 // REFACTOR: NO NEED TO NEST THENs
 // axios

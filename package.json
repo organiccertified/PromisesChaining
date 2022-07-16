@@ -12,6 +12,7 @@
     "docker:run": "docker run --rm -it -p 3000:3000 thinkful-ed/zid-wr-modern-asynchronous-programming-01-promise-chaining",
     "docker:stop": "docker stop $(docker ps -q)",
     "docker:test": "docker run -t  thinkful-ed/zid-wr-modern-asynchronous-programming-01-promise-chaining npm test",
+    "start": "json-server --watch --port=5000 db.json",
     "start:solution": "npm run -it docker:build && npm run docker:run",
     "test": "jest",
     "test:solution": "npm run docker:build && npm run docker:test"
