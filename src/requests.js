@@ -28,7 +28,7 @@ const leo = {
 
   
 // REFACTOR: NO NEED TO NEST THENs
-axios
+axios //function exists() si das un id te trae ese pedo
   .get(constellationsUrl)
   .then(({ data }) => {
     return data.find(( { name }) => name === leo.name);

@@ -2,46 +2,21 @@ const axios = require("../utils/axios");
 const BASE_URL = "http://localhost:5000";
 
 function updateIfExists(id, body) {
-  const url = `${BASE_URL}/constellations/${id}`; //looks for id -OK
+  const url = `${BASE_URL}/constellations/${id}`;
   return axios
     .get(url)
-    .then(({ data }) => {
-      {return data};          //returns data - ok
-      })
-    .then((exists) => {                               //this fails
-      if (exists) throw `Constallation with "${id}" already exists`;
+    .then(() => {
       return axios
-        .put(url, body)                               // because 11 fails this fails
-        .then(({ data }) => {return data});
+        .put(url, body)
+    })
+   .then(({ data }) => {
+        return data;
       })
-    .catch(({message})=> {return message});
+    .catch((error) => {
+      return (error.message);
+    });
 }
-
-// test data
-const leo = {
-  name: "JustModified",
-  meaning: "Dove",
-  starsWithPlanets: 3,
-  quadrant: "SQ1"
-};
-//local test
-updateIfExists("UEUrlfX", leo)
-//finish test block
 
 module.exports = {
   updateIfExists,
 };
-
-// REFACTOR: NO NEED TO NEST THENs
-// axios
-//   .get(constellationsUrl)
-//   .then(({ data }) => {
-//     return data.find(( { name }) => name === leo.name);
-//   })
-//   .then((exists) => {
-//     if (exists) throw `Constellation "${leo.name}" already exists.`;
-//     return axios
-//       .post(constellationsUrl, leo)
-//       .then(({ data }) => console.log(data));
-//   })
-//   .catch(console.log);
