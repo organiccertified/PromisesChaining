@@ -6,28 +6,26 @@ function updateIfExists(id, body) {
   return axios
     .get(url)
     .then(({ data }) => {
-      return data;          //returns data - ok
+      {return data};          //returns data - ok
       })
     .then((exists) => {                               //this fails
       if (exists) throw `Constallation with "${id}" already exists`;
       return axios
         .put(url, body)                               // because 11 fails this fails
-        .then(({ data }) => console.log(data));
+        .then(({ data }) => {return data});
       })
-    .catch(({message}) => {         // if ln 11 fails why msg nto gets printed correctly?
-      console.error(message);    
-    })
+    .catch(({message})=> {return message});
 }
 
 // test data
 const leo = {
-  name: "Columba",
+  name: "JustModified",
   meaning: "Dove",
   starsWithPlanets: 3,
   quadrant: "SQ1"
 };
 //local test
-console.log(updateIfExists("xxx", leo))
+updateIfExists("UEUrlfX", leo)
 //finish test block
 
 module.exports = {
